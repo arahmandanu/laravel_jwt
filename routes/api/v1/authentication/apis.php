@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\v1\AuthenticationController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['auth:api']], function () {
-    Route::resources([
-        'authentication' => \User\ResourceController::class,
-    ]);
+Route::group(['prefix' => 'authentication'], function () {
+    Route::post('login', [AuthenticationController::class, 'login'])->name('jwt_login');
 });

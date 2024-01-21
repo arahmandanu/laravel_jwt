@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/api.php'));
 
             Route::group([
-                'middleware' => ['api'],
+                'middleware' => ['api', 'ensure_valid_request'],
                 'namespace' => "{$this->apiNamespace}\V1",
                 'prefix' => 'api/v1',
             ], function ($router) {
