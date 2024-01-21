@@ -15,10 +15,10 @@ class EnsureValidRequest
      */
     public function handle(Request $request, Closure $next)
     {
-        if (in_array($request->header('accept'), ['application/json'])) {
-            return $next($request);
+        if (!$request->expectsJson()) {
+            dd('error bang');
         }
 
-        dd('error bang');
+        return $next($request);
     }
 }

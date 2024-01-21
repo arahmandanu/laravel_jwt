@@ -16,13 +16,11 @@ class AuthenticationController extends Controller
      */
     public function login(Request $request)
     {
-        dd($request->header());
-
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:posts|max:255',
-            'body' => 'required',
+            'email' => 'required|unique:posts|max:255',
+            'password' => 'required',
         ]);
 
-        dd($validated);
+        dd($validator->errors());
     }
 }
