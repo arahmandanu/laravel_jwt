@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -32,6 +33,19 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        //
+        $this->reportable(function (Throwable $e) {
+            #
+        });
+
+        $this->renderable(function (\Exception $exception, $request) {
+            return $this->handleException($request, $exception);
+        });
+    }
+
+    private function handleException($request, $exception)
+    {
+        if ($request->is('api/*')) {
+            return (new CustomHandler($request, $exception))->call();
+        }
     }
 }

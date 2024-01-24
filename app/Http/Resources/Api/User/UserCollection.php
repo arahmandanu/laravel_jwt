@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api\User;
 
+use App\Http\Resources\Api\Pagination;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class UserCollection extends ResourceCollection
@@ -16,6 +17,7 @@ class UserCollection extends ResourceCollection
     {
         return [
             parent::toArray($this->collection),
+            new Pagination($this),
         ];
     }
 }

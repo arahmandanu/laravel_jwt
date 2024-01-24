@@ -17,7 +17,7 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        return new UserCollection(User::paginate());
+        return $this->response(new UserCollection(User::paginate()));
     }
     /**
      * Show the form for creating a new resource.

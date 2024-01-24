@@ -3,7 +3,6 @@
 namespace App\Http\Middleware\Api;
 
 use Closure;
-use Exception;
 use JWTAuth;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
@@ -19,12 +18,8 @@ class ValidUserRequest extends BaseMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        try {
-            JWTAuth::parseToken()->authenticate();
-        } catch (Exception $e) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
+        $this->checkForToken($request);
+        JWTAuth::parseToken()->authenticate();
         return $next($request);
     }
 }
