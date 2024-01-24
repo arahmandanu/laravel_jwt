@@ -6,7 +6,7 @@ use App\Models\User;
 
 trait Handler
 {
-    public function response($data = null, bool $status = true, ?string $message = '', ?int $code = 200)
+    public function response($data = null, bool $status = true, ?string $message = 'success', ?int $code = 200)
     {
         if ($status === true) {
             if (getType($data) == "object" && get_class($data) === "App\Http\Resources\Api\ResponsePagination") {

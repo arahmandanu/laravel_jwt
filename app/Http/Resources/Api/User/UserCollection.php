@@ -1,16 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Api;
+namespace App\Http\Resources\Api\User;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class AuthenticationCollection extends ResourceCollection
+class UserCollection extends ResourceCollection
 {
-
-    public function __construct(User $user)
-    {
-        $this->var = $var;
-    }
     /**
      * Transform the resource collection into an array.
      *
@@ -19,6 +14,8 @@ class AuthenticationCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            parent::toArray($this->collection),
+        ];
     }
 }

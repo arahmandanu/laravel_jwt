@@ -39,29 +39,13 @@ class AuthenticationController extends Controller
         if (!$user = auth('api')->attempt($request->only('email', 'password'))) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        dd(auth()->user(), $user);
+
         $data = [
             'access_token' => $user,
             'token_type' => 'bearer',
-            'expires_in' => 60 * 60
+            'expires_in' => auth('api')->factory()->getTTL()  * 60
         ];
 
-        $this->response($data);
-    }
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => 60 * 60
-        ]);
+        return $this->response($data);
     }
 }
