@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types = 1);
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'name' => 'Adrian Rahmandanu',
             'email' => 'missutsan@example.com',
             'password' => Hash::make('password'),
+            'role' =>
         ]);
     }
 }

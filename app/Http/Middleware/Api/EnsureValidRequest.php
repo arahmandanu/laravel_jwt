@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware\Api;
 
 use Closure;
+use Exception;
 use Illuminate\Http\Request;
+use Monad\FTry;
+use Monad\FTry\Failure;
 
 class EnsureValidRequest
 {
@@ -15,10 +20,16 @@ class EnsureValidRequest
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->expectsJson()) {
-            dd('error bang');
-        }
+        $check = FTry::with($this->isValidRequest($request));
+        if (!$check->isSuccess()) $check->pass();
 
         return $next($request);
+    }
+
+    private function isValidRequest($request)
+    {
+        if (!$request->expectsJson()) {
+            return new Failure(new Exception('Invalid request!', 400));
+        }
     }
 }

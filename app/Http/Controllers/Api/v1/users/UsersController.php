@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\v1\users;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\User\UserCollection;
-use App\Http\Resources\Api\User\UserEntities;
 use App\Models\User;
 use Illuminate\Http\Request;
 

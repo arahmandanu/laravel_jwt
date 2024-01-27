@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "570a45ddb8e8e0713e958b09fd1e0573",
+    "content-hash": "aa0dac4356be614effc4363b057caf47",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -190,6 +190,60 @@
                 }
             ],
             "time": "2023-12-11T17:09:12+00:00"
+        },
+        {
+            "name": "chippyash/monad",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chippyash/Monad.git",
+                "reference": "56b0d0177880932448e41b07c1d8e4ba16f8804f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chippyash/Monad/zipball/56b0d0177880932448e41b07c1d8e4ba16f8804f",
+                "reference": "56b0d0177880932448e41b07c1d8e4ba16f8804f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "1.6.*",
+                "phpunit/phpunit": ">=5.7.9,<6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Monad\\": "src\\chippyash"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ashley Kitson",
+                    "email": "ashley@zf4.biz"
+                }
+            ],
+            "description": "Functional programming Monad support",
+            "homepage": "http://zf4.biz/packages?utm_source=packagist&utm_medium=web&utm_campaign=blinks&utm_content=monad",
+            "keywords": [
+                "Match",
+                "collection",
+                "functional",
+                "identity",
+                "monad",
+                "option",
+                "try"
+            ],
+            "support": {
+                "issues": "https://github.com/chippyash/Monad/issues",
+                "source": "https://github.com/chippyash/Monad/tree/2.1.1"
+            },
+            "time": "2018-07-16T17:07:40+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
