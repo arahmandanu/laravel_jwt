@@ -2,7 +2,10 @@
 
 namespace users;
 
+use App\Http\Controllers\Api\v1\users\UsersController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::resource('users', UsersController::class);
+Route::group(['prefix' => 'users'], function () {
+    Route::get('/', [UsersController::class, 'index'])->middleware('userScopes:admin,staff')->name('list_users');
+});

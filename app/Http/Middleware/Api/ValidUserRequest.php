@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Middleware\Api;
 
 use Closure;
-use Exception;
 use JWTAuth;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;

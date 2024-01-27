@@ -1,7 +1,10 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
+use App\Enum\Users\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -20,7 +23,7 @@ class UserSeeder extends Seeder
             'name' => 'Adrian Rahmandanu',
             'email' => 'missutsan@example.com',
             'password' => Hash::make('password'),
-            'role' =>
+            'role' => Role::ADMIN()
         ]);
     }
 }
