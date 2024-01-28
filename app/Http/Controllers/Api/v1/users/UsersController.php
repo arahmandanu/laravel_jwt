@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\v1\users;
 
-use App\Core\Repositories\Users\FindUser;
+use App\Core\Repositories\Users\Find;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\User\UserCollection;
 use App\Http\Resources\Api\User\UserEntities;
@@ -30,7 +30,7 @@ class UsersController extends Controller
      */
     public function me(Request $request)
     {
-        $findUser = ((new FindUser(auth()->user()->id))->call());
+        $findUser = ((new Find(auth()->user()->id))->call());
         if (!$findUser->isSuccess()) $findUser->pass();
 
         return $this->response($findUser->value());

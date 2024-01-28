@@ -9,7 +9,7 @@ use App\Models\User;
 use Monad\FTry;
 use Monad\FTry\Success;
 
-class FindUser
+class Find
 {
     private $id;
     public function __construct($id = null)
