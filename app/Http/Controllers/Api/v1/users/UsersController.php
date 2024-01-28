@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\v1\users;
 
+use App\Core\Repositories\Users\FindUser;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\User\UserCollection;
+use App\Http\Resources\Api\User\UserEntities;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -20,6 +22,21 @@ class UsersController extends Controller
     {
         return $this->response(new UserCollection(User::paginate()));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function me(Request $request)
+    {
+        $findUser = ((new FindUser(auth()->user()->id))->call());
+        if (!$findUser->isSuccess()) $findUser->pass();
+
+        return $this->response($findUser->value());
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
