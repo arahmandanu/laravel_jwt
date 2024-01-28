@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\v1\users;
 
 use App\Core\Repositories\Users\Find;
+use App\Core\Repositories\Users\Where;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\User\UserCollection;
-use App\Http\Resources\Api\User\UserEntities;
-use App\Models\User;
+use App\Http\Requests\Api\V1\Users\ListUsersGetRequest;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -18,9 +17,13 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(ListUsersGetRequest $request)
     {
-        return $this->response(new UserCollection(User::paginate()));
+        $query = $this->FormatQuery($request->validated());
+        $listUsers = ((new Where($query['query'], $query['page'], $query['limit']))->call());
+        if (!$listUsers->isSuccess()) $listUsers->pass();
+
+        return $this->response($listUsers->value());
     }
 
     /**
