@@ -21,7 +21,7 @@ class Where
 
     public function call()
     {
-        return FTry::with($this->listUsers($this->query, $this->page, $this->limit));
+        return $this->listUsers($this->query, $this->page, $this->limit);
     }
 
     private function listUsers($query, $page, $limit)

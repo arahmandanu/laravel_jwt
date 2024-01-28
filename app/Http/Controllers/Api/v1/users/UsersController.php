@@ -9,6 +9,7 @@ use App\Core\Repositories\Users\Where;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Users\ListUsersGetRequest;
 use Illuminate\Http\Request;
+use Monad\FTry;
 
 class UsersController extends Controller
 {
@@ -20,7 +21,7 @@ class UsersController extends Controller
     public function index(ListUsersGetRequest $request)
     {
         $query = $this->FormatQuery($request->validated());
-        $listUsers = ((new Where($query['query'], $query['page'], $query['limit']))->call());
+        $listUsers = FTry::with(((new Where($query['query'], $query['page'], $query['limit']))->call()));
         if (!$listUsers->isSuccess()) $listUsers->pass();
 
         return $this->response($listUsers->value());
@@ -33,7 +34,7 @@ class UsersController extends Controller
      */
     public function me(Request $request)
     {
-        $findUser = ((new Find(auth()->user()->id))->call());
+        $findUser = FTry::with(((new Find(auth()->user()->id))->call()));
         if (!$findUser->isSuccess()) $findUser->pass();
 
         return $this->response($findUser->value());

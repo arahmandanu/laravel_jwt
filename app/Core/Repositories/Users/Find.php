@@ -19,7 +19,7 @@ class Find
 
     public function call()
     {
-        return FTry::with($this->getUser());
+        return $this->getUser();
     }
 
     private function getUser()
