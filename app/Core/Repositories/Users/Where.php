@@ -27,7 +27,7 @@ class Where
     private function listUsers($query, $page, $limit)
     {
         $data = User::when($query, function ($exe, $query) {
-            return $exe->where('full_name', 'like', "$query%");
+            return $exe->where('name', 'like', "$query%");
         })
             ->paginate($limit);
 

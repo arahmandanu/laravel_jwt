@@ -16,7 +16,7 @@ class UserEntities extends JsonResource
     {
         return [
             'id' => $this->id,
-            'full_name' => $this->name
+            'name' => $this->name
         ];
     }
 }
