@@ -20,7 +20,7 @@ class Where extends AbstractRepositories
 
     public function call()
     {
-        return $this->listUsers($this->query);
+        return new Success($this->listUsers($this->query)->value());
     }
 
     private function listUsers($query)
