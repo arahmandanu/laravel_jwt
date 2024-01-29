@@ -4,34 +4,32 @@ declare(strict_types=1);
 
 namespace App\Core\Repositories\Users;
 
+use App\Core\Repositories\AbstractRepositories;
 use App\Http\Resources\Api\User\UserCollection;
 use App\Models\User;
 use Monad\FTry;
 use Monad\FTry\Success;
 
-class Where
+class Where extends AbstractRepositories
 {
-    public $query, $page, $limit, $order;
-    public function __construct(string $query = null, string $page = '0', string $limit = '10', string $order = 'asc')
+    public $query;
+    public function __construct($query = [])
     {
-        $this->query = $query;
-        $this->page = $page;
-        $this->limit = $limit;
-        $this->order = $order;
+        $this->query = $this->FormatQuery($query);
     }
 
     public function call()
     {
-        return $this->listUsers($this->query, $this->page, $this->limit, $this->order);
+        return $this->listUsers($this->query);
     }
 
-    private function listUsers($query, $page, $limit, $order)
+    private function listUsers($query)
     {
-        $data = User::when($query, function ($exe, $query) {
-            return $exe->where('name', 'like', "$query%");
+        $data = User::when($query['query'], function ($exe, $paramsQuery) {
+            return $exe->where('name', 'like', "$paramsQuery%");
         })
-            ->orderBy('name', $order)
-            ->paginate($limit);
+            ->orderBy('name', $query['order'])
+            ->paginate($query['limit']);
 
         return new Success(new UserCollection($data));
     }

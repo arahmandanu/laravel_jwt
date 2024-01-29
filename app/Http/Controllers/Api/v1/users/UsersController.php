@@ -20,8 +20,7 @@ class UsersController extends Controller
      */
     public function index(ListUsersGetRequest $request)
     {
-        $query = $this->FormatQuery($request->validated());
-        $listUsers = FTry::with(((new Where($query['query'], $query['page'], $query['limit'], $query['order']))->call()));
+        $listUsers = FTry::with(((new Where(\collect($request->validated())))->call()));
         if (!$listUsers->isSuccess()) $listUsers->pass();
 
         return $this->response($listUsers->value());
