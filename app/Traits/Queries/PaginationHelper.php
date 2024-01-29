@@ -13,6 +13,7 @@ trait PaginationHelper
             'limit' => 10,
             'page' => 1,
             'query' => '',
+            'order' => 'asc'
         ];
         $data = array_merge($data, $request);
 

@@ -26,7 +26,8 @@ class ListUsersGetRequest extends FormRequest
         return [
             'page' => ['integer', 'required'],
             'query' => ['string'],
-            'limit' => ['integer', 'required']
+            'limit' => ['integer', 'required'],
+            'order' => ['string', 'in:asc,desc']
         ];
     }
 }

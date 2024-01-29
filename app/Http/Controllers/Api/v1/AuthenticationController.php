@@ -47,11 +47,8 @@ class AuthenticationController extends Controller
     public function logout()
     {
         $execute = FTry::with(function () {
-            if (auth('api')->logout()) {
-                return new Success(true);
-            } else {
-                return new Failure(new Exception('Failed to logout!'));
-            };
+            auth('api')->logout();
+            return new Success(true);
         });
         if (!$execute->isSuccess()) $execute->pass();
 
