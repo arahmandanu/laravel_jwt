@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,8 +15,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            CreateRoles::class,
             UserSeeder::class,
-            DevelopmentUserSeeder::class
         ]);
+
+        if (App::environment(['local', 'staging', 'development'])) {
+            $this->call([
+                DevelopmentUserSeeder::class
+            ]);
+        }
     }
 }

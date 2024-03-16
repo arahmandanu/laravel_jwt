@@ -6,7 +6,7 @@ namespace App\Enum\Users;
 
 use MyCLabs\Enum\Enum;
 
-final class Role extends Enum
+final class UserRoles extends Enum
 {
     private const ADMIN = 'admin';
     private const STAFF = 'staff';

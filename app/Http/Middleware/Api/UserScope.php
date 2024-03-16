@@ -30,15 +30,9 @@ class UserScope
     public function validUserScope($scopes = [])
     {
         $user = auth()->user();
-        if (!$user) {
-            return new Failure(new AuthenticationException());
-        }
+        if (!$user)  return new Failure(new AuthenticationException());
+        if ($user->hasRole($scopes)) return new Success(true);
 
-        foreach ($scopes as $scope) {
-            if ($user->role == $scope) {
-                return new Success(true);
-            }
-        }
         return new Failure(new ScopeNotProvided());
     }
 }
