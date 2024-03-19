@@ -44,14 +44,12 @@ class CustomHandler
                 $message = "You don't have access for this request!";
                 $code = 401;
                 break;
+            case 'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException':
             case "Symfony\Component\HttpKernel\Exception\HttpException":
                 $code = self::$exception->getStatusCode();
                 break;
             case 'Tymon\JWTAuth\Exceptions\TokenExpiredException':
                 $code = 401;
-                break;
-            case 'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException':
-                $code = self::$exception->getStatusCode();
                 break;
             case 'Tymon\JWTAuth\Exceptions\TokenInvalidException':
                 $message = "Invalid Token!";
