@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Redis\User;
 
-use App\Http\Resources\Api\User\UserEntities;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Monad\FTry;
@@ -12,7 +11,7 @@ use Monad\FTry\Failure;
 use Monad\FTry\Success;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
-class GetFindUser
+class Find
 {
     public $id;
 
@@ -35,8 +34,7 @@ class GetFindUser
         $user = Cache::remember('users' . $id, 30, function () use ($id) {
             return User::find($id);
         });
-        if (!$user || is_null($user)) return new Failure(new UnprocessableEntityHttpException('Resource Not Found!'));
 
-        return new Success(new UserEntities($user));
+        return new Success($user);
     }
 }

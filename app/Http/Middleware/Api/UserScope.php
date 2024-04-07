@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Api;
 
+use App\Core\Repositories\Users\Find;
 use App\Exceptions\MyException\ScopeNotProvided;
 use Closure;
 use Illuminate\Auth\AuthenticationException;
@@ -29,7 +30,10 @@ class UserScope
 
     public function validUserScope($scopes = [])
     {
-        $user = auth()->user();
+        $execute = FTry::with((new Find(auth('api')->payload()['guard']))->call());
+        if (!$execute->isSuccess()) $execute->pass();
+
+        $user = $execute->value();
         if (!$user)  return new Failure(new AuthenticationException());
         if ($user->hasRole($scopes)) return new Success(true);
 

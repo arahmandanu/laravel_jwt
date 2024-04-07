@@ -61,10 +61,8 @@ class AuthenticationController extends Controller
 
     public function refreshToken(Request $request)
     {
-        $before = auth('api')->tokenById(auth()->user()->id);
         $execute = FTry::with(function () {
-            auth('api')->refresh();
-            return new Success(true);
+            return new Success(auth('api')->refresh());
         });
         if (!$execute->isSuccess()) $execute->pass();
 

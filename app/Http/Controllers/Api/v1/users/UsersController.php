@@ -36,10 +36,10 @@ class UsersController extends Controller
      */
     public function me(Request $request)
     {
-        $tes = FTry::with((new GetFindUser(auth()->user()->id))->call());
-        if (!$tes->isSuccess()) $tes->pass();
+        $execute = FTry::with((new Find(auth()->user()->id))->call());
+        if (!$execute->isSuccess()) $execute->pass();
 
-        return $this->response($tes->value());
+        return $this->response($execute->value());
     }
 
 
