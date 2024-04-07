@@ -8,6 +8,9 @@ use App\Core\Repositories\Users\Find;
 use App\Core\Repositories\Users\Where;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Users\ListUsersGetRequest;
+use App\Services\Redis\User\FindUser;
+use App\Services\Redis\User\GetFindUser;
+use Facade\FlareClient\Http\Exceptions\NotFound;
 use Illuminate\Http\Request;
 use Monad\FTry;
 
@@ -33,10 +36,10 @@ class UsersController extends Controller
      */
     public function me(Request $request)
     {
-        $findUser = FTry::with(((new Find(auth()->user()->id))->call()));
-        if (!$findUser->isSuccess()) $findUser->pass();
+        $tes = FTry::with((new GetFindUser(auth()->user()->id))->call());
+        if (!$tes->isSuccess()) $tes->pass();
 
-        return $this->response($findUser->value());
+        return $this->response($tes->value());
     }
 
 

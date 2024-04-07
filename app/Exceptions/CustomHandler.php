@@ -49,6 +49,7 @@ class CustomHandler
                 $code = self::$exception->getStatusCode();
                 break;
             case 'Tymon\JWTAuth\Exceptions\TokenExpiredException':
+            case 'Tymon\\JWTAuth\\Exceptions\\TokenBlacklistedException':
                 $code = 401;
                 break;
             case 'Tymon\JWTAuth\Exceptions\TokenInvalidException':
@@ -56,7 +57,7 @@ class CustomHandler
                 $code = 401;
                 break;
             default:
-                $code = 400;
+                $code = self::$exception->getStatusCode();
         }
 
         return $this->responseHandler($message, $code, $data);
